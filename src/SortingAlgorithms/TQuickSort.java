@@ -19,7 +19,8 @@ public class TQuickSort extends TSortThread{
 
     @Override
     public void Sort(int[] array) {
-        QuickSort(array, 0, array.length-1);
+//        QuickSort(array, 0, array.length-1);
+        QuickSortWiki(array, 0, array.length-1);
 
     }
     
@@ -83,4 +84,89 @@ public class TQuickSort extends TSortThread{
 
     }
     
+ /*   
+    // Sorts a (portion of an) array, divides it into partitions, then sorts those
+algorithm quicksort(A, lo, hi) is 
+  // Ensure indices are in correct order
+  if lo >= hi || lo < 0 then 
+    return
+    
+  // Partition array and get the pivot index
+  p := partition(A, lo, hi) 
+      
+  // Sort the two partitions
+  quicksort(A, lo, p - 1) // Left side of pivot
+  quicksort(A, p + 1, hi) // Right side of pivot
+
+// Divides array into two partitions
+algorithm partition(A, lo, hi) is 
+  pivot := A[hi] // Choose the last element as the pivot
+
+  // Temporary pivot index
+  i := lo - 1
+
+  for j := lo to hi - 1 do 
+    // If the current element is less than or equal to the pivot
+    if A[j] <= pivot then 
+      // Move the temporary pivot index forward
+      i := i + 1
+      // Swap the current element with the element at the temporary pivot index
+      swap A[i] with A[j]
+
+  // Move the pivot element to the correct pivot position (between the smaller and larger elements)
+  i := i + 1
+  swap A[i] with A[hi]
+  return i // the pivot index
+
+*/
+    
+    private void QuickSortWiki(int[] array, int lo, int hi)
+    {
+        // Ensure indices are in correct order
+//        if lo >= hi || lo < 0 then return
+        if (lo >= hi || lo < 0) return;
+        
+        // Partition array and get the pivot index
+        int p = partition(array, lo, hi);
+        // Sort the two partitions
+        QuickSortWiki(array, lo, p - 1); // Left side of pivot
+        QuickSortWiki(array, p + 1, hi); // Right side of pivot
+          
+        
+    }
+    
+    int partition(int[] array, int lo, int hi)
+    {
+        int i=0;
+        int t=0;
+        int pivot = array[hi]; // Choose the last element as the pivot
+        i = lo - 1; // Temporary pivot index
+
+        //for j := lo to hi - 1 do 
+        for(int j = lo; j< hi;j++){
+          // If the current element is less than or equal to the pivot
+          //if A[j] <= pivot then 
+          if(array[j]<= pivot)
+          {  // Move the temporary pivot index forward
+            i = i + 1;
+            VisualSwap(array[i], array[j], i, j);
+            // Swap the current element with the element at the temporary pivot index
+            // swap A[i] with A[j]
+            t = array[i];
+            array[i] = array[j];
+            array[j] = t;
+          }
+        }
+        // Move the pivot element to the correct pivot position (between the smaller and larger elements)
+        i = i + 1;
+        //swap A[i] with A[hi]
+  
+        VisualSwap(array[i], array[hi], i, hi);
+        t = array[i];
+        array[i] = array[hi];
+        array[hi] = t;
+  
+  
+        return i;
+    }
 }
